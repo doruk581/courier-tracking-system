@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: courier-tracking-service-local
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+server:
+  port: 4567
+  tomcat:
+    max-threads: 5
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /management
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: false
+  security:
+    enabled: false
+
+info:
+  status: OK
+  version: ${VERSION:1}
+  env: local
+
+courier-configuration:
+  mongo-db-connection-string: mongodb://mongodb:27017/CourierDB
+  mongo-db-name: "CourierDB"
+  mongo-collection-name: "Courier"

@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  couriertrackingsystem:
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    expose:
+      - "4567"
+    ports:
+      - 4567:4567
+    networks:
+      - courier
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: on-failure
+    networks:
+      - courier
+    environment:
+      MONGO_INITDB_DATABASE: CourierDB
+    ports:
+      - "27017:27017"
+networks:
+  courier:
+    driver: bridge
