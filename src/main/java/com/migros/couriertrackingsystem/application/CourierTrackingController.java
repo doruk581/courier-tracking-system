@@ -2,6 +2,7 @@ package com.migros.couriertrackingsystem.application;
 
 import com.migros.couriertrackingsystem.application.validation.ValidationResult;
 import com.migros.couriertrackingsystem.application.validation.ValidationService;
+import com.migros.couriertrackingsystem.domain.CourierNotExistException;
 import com.migros.couriertrackingsystem.interfaces.ApiError;
 import com.migros.couriertrackingsystem.interfaces.request.CourierControlRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +24,6 @@ public class CourierTrackingController {
         this.courierControlRequestValidationService = courierControlRequestValidationService;
     }
 
-    @GetMapping(path = "/hello")
-    public String returnOk() {
-        return "OK";
-    }
-
     @PostMapping(path = "/courier/control")
     public ResponseEntity courierControl(@RequestBody CourierControlRequest command) {
 
@@ -44,6 +40,7 @@ public class CourierTrackingController {
 
     @GetMapping(path = "/courier/totaldistance/{id}")
     public ResponseEntity getTotalDistance(@PathVariable("id") String id) {
+
         return ResponseEntity.ok(courierTrackingService.getCourierTotalDistance(id));
     }
 
@@ -52,5 +49,11 @@ public class CourierTrackingController {
     public final ResponseEntity<ApiError> handleException(Exception ex, WebRequest request) {
         log.warn("Unhandled exception occurred!", ex);
         return new ResponseEntity<>(ApiError.create(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(), "CTS1000"), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CourierNotExistException.class)
+    public final ResponseEntity<ApiError> handleCourierNotExistException(Exception ex, WebRequest request) {
+        log.warn("CourierNotExistException occurred!", ex);
+        return new ResponseEntity<>(ApiError.create(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(), "CTS1005"), HttpStatus.BAD_REQUEST);
     }
 }

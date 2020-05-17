@@ -3,6 +3,7 @@ package com.migros.couriertrackingsystem.domain;
 
 import com.migros.couriertrackingsystem.interfaces.request.CourierControlRequest;
 
+//Builder pattern as lombok
 public class DefaultCourierFactory implements CourierFactory {
 
     @Override

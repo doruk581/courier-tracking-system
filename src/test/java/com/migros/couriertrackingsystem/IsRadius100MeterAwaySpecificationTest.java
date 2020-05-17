@@ -30,7 +30,7 @@ public class IsRadius100MeterAwaySpecificationTest {
 
     @Test
     public void controlThatIsSatisfiedMethodReturnTrueWhenTwoLocationsNearBetween100Meters() {
-        isRadius100MeterAwaySpecification = IsRadius100MeterAwaySpecification.create(29.1244229, 40.9923307,calculationService);
+        isRadius100MeterAwaySpecification = IsRadius100MeterAwaySpecification.create(29.1244229, 40.9923307, calculationService);
 
         final List<Store> storeList = storeService.getStoreInformation();
 

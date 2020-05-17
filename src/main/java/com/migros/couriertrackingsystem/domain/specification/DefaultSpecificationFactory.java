@@ -6,7 +6,10 @@ import com.migros.couriertrackingsystem.domain.calculate.CalculationService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+/*
+* Factory Pattern
+* Specification Pattern
+* */
 public class DefaultSpecificationFactory implements SpecificationFactory {
 
     @Override

@@ -1,6 +1,7 @@
 package com.migros.couriertrackingsystem.infrastructure.repository;
 
 import com.migros.couriertrackingsystem.domain.Courier;
+import com.migros.couriertrackingsystem.domain.CourierNotExistException;
 import com.migros.couriertrackingsystem.domain.CourierTrackingRepository;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -75,6 +76,9 @@ public class MongoCourierTrackingRepository implements CourierTrackingRepository
                 .find(filter)
                 .sort(sort)
                 .into(new LinkedList<>());
+
+        if (couriers.isEmpty())
+            throw CourierNotExistException.create(courier);
 
 
         return couriers;

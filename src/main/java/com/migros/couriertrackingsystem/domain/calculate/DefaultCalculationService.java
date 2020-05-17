@@ -4,8 +4,6 @@ import com.migros.couriertrackingsystem.domain.Constants;
 
 
 public class DefaultCalculationService implements CalculationService {
-//latp1 --store
-//latp1 -- courier
 
     @Override
     public Float calculateDistanceBetweenPoints(Double latP1, Double longP1, Double latP2, Double longP2) {
